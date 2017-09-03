@@ -32,4 +32,8 @@ public class Transaction {// Transaction entity owns the relationship.
 	public void setTransactionTime(Date transactionTime) {
 		this.transactionTime = transactionTime;
 	}
+	@Override
+	public String toString() {
+		return "Transaction [id=" + id + ", transactionTime=" + transactionTime + "]";
+	}
 }

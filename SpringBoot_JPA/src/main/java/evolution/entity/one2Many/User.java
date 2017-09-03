@@ -44,4 +44,8 @@ public class User {// This Transaction entity owns the relationship.
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", email=" + email + ", transactions=" + transactions + "]";
+	}
 }

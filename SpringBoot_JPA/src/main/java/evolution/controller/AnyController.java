@@ -63,7 +63,9 @@ public class AnyController {
 	
 	@GetMapping("/find/all")
 	public Iterable<User> getAllUsers() {
-		return userRepository.findAll();
+		Iterable<User> users = userRepository.findAll();
+		users.forEach(System.out::println);
+		return users;
 	}
 	
 	@GetMapping(path="/find/by/name")
