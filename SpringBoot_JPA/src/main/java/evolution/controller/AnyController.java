@@ -1,18 +1,15 @@
 package evolution.controller;
 
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import evolution.entity.common.User;
 import evolution.entity.many2Many.Post;
 import evolution.entity.many2Many.Tag;
-import evolution.entity.one2Many.Transaction;
-import evolution.entity.one2Many.User;
 import evolution.repository.PostRepository;
 import evolution.repository.UserRepository;
 
@@ -24,16 +21,11 @@ public class AnyController {
 	@Autowired 
 	private PostRepository postRepository;
 
-	@GetMapping("/one/2/many/insert")
-	public User one2ManyInsert() {
+	@GetMapping("/common/insert")
+	public User commonInsert() {
 		User user = new User();
 		user.setName("Chen");
 		user.setEmail("fslichen@126.com");
-		Transaction transaction0 = new Transaction();
-		transaction0.setTransactionTime(new Date());
-		Transaction transaction1 = new Transaction();
-		transaction1.setTransactionTime(new Date());
-		user.setTransactions(Arrays.asList(transaction0, transaction1));
 		userRepository.save(user);
 		return user;
 	}
@@ -61,15 +53,13 @@ public class AnyController {
 		posts.forEach(System.out::println);
 	}
 	
-	@GetMapping("/find/all")
-	public Iterable<User> getAllUsers() {
-		Iterable<User> users = userRepository.findAll();
-		users.forEach(System.out::println);
-		return users;
+	@GetMapping("/common/find/all")
+	public Iterable<User> commonFindAll() {
+		return userRepository.findAll();
 	}
 	
-	@GetMapping(path="/find/by/name")
-	public List<User> findByName(@RequestParam String name) {
-		return userRepository.findByName(name);
+	@GetMapping("/common/find/by/name/and/email")
+	public Iterable<User> commonFindByNameAndEmail() {
+		return userRepository.findByNameAndEmail("Chen", "fslichen@126.com");
 	}
 }
